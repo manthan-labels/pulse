@@ -22,7 +22,7 @@ function Dashboard() {
             <h2>Your monitors:</h2>
 
             {monitors.map((monitor) => (<div key={monitor._id}>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkef3M6S34ScEHEqenN6v5B4e1fBfjEWTlHBntu6fSeA&s" onClick={() => window.location.href=`/dashboard/monitors/${monitor._id}`} /> 
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkef3M6S34ScEHEqenN6v5B4e1fBfjEWTlHBntu6fSeA&s" onClick={() => window.location.href=`/dashboard/trackmonitor/${monitor._id}`} /> 
                 <p>{monitor.name}</p>
             </div>))}
 
