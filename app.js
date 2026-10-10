@@ -84,10 +84,6 @@ app.get("/dashboard", isLoggedIn, async function (req, res) {
     monitors = await monitorModel.find({user_id: loggedInUserData.user_id});
     res.json(monitors);
     console.log("Fetched monitors successfully!");
-
-    
-    const data = await checkMonitor("6ac64ffa0fec5eed962313fa");
-    console.log(data);
 });
 
 app.post("/dashboard/addMonitor", isLoggedIn, async function (req, res) {
