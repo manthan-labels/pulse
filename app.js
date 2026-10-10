@@ -106,6 +106,10 @@ app.post("/dashboard/addMonitor", isLoggedIn, async function (req, res) {
     });
 });
 
+app.get("/dashboard/trackmonitor/:monitorid", function (req, res) {
+    console.log("Can track and analyze individual monitors here")
+});
+
 app.get("/logout", function (req, res) {
     res.clearCookie("token");
     res.json({message: "Logged out"});
