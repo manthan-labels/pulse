@@ -105,7 +105,9 @@ app.post("/dashboard/addMonitor", isLoggedIn, async function (req, res) {
 app.get("/dashboard/trackmonitor/:monitorid", isLoggedIn, async function (req, res) {
     console.log("Can track and analyze individual monitors here");
     console.log(req.params.monitorid);
-    res.json(await checkMonitor(req.params.monitorid));
+    checkMonitor(req.params.monitorid).then(monitorStats => {
+        res.json(monitorStats);
+    });
 });
 
 app.get("/logout", function (req, res) {

@@ -11,11 +11,12 @@ function Trackmonitor() {
     async function fetchMonitor () {
         const response = await fetch(`http://localhost:3000/dashboard/trackmonitor/${monitorid}`, {method: "GET", credentials: "include"});
         const data = await response.json();
-        console.log(data);
-        return 0;
+        return data;
     }
 
-        fetchMonitor();
+        const fetchedMonitorData = fetchMonitor().then(data => {
+            
+        });
         
         // yet to display stats data on frontend
 
