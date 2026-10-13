@@ -7,6 +7,7 @@ import Dashboard from "./pages/dashboard";
 import Logout from "./pages/logout";
 import Addmonitor from "./pages/addMonitor";
 import Trackmonitor from "./pages/trackmonitor";
+import Deletemonitor from "./pages/deletemonitor";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/logout" element={<Logout />} />
         <Route path="/dashboard/addMonitor" element={<Addmonitor/>} />
         <Route path="/dashboard/trackmonitor/:monitorid" element={<Trackmonitor />} />
+        <Route path="/dashboard/deleteMonitor/:monitorid" element={<Deletemonitor />} />
       </Routes>
     </BrowserRouter>
   )

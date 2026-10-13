@@ -102,6 +102,17 @@ app.post("/dashboard/addMonitor", isLoggedIn, async function (req, res) {
     });
 });
 
+app.post("/dashboard/deleteMonitor/:monitorid", isLoggedIn, async function (req, res) {
+    const monitorToDeleteDataReceived = req.body;
+    console.log(monitorToDeleteDataReceived);
+
+    await monitorModel.findOneAndDelete({
+        _id: req.params.monitorid
+    });
+
+    res.json({message: "Monitor deleted successfully!"});
+});
+
 app.get("/dashboard/trackmonitor/:monitorid", isLoggedIn, async function (req, res) {
     console.log("Can track and analyze individual monitors here");
     console.log(req.params.monitorid);

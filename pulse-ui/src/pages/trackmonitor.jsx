@@ -26,13 +26,6 @@ function Trackmonitor() {
         fetchMonitor();
             }, [monitorid]);
 
-
-        //const fetchedMonitorData = fetchMonitor().then(data => {
-        //    
-        //});
-        
-        // yet to display stats data on frontend
-
     return (
         <div>
             <h1>This is your monitor</h1>
