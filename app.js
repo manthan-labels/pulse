@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 
 const userModel = require("./usermodel");
 const monitorModel = require("./monitormodel");
+const fetchHistoryModel = require("./fetchrecordmodel");
 
 app.use(cors({origin: "http://localhost:5173", credentials: true}));
 app.use(express.json());
@@ -25,6 +26,15 @@ async function checkMonitor(monitor_id) {
     const response = await fetch(monitorUrl);
     const latency = Date.now() - start;
     const success = response.status == monitorData.expectedStatusCode;
+
+    await fetchHistoryModel.create({
+        monitor_id,
+        statusCode: response.status,
+        latency,
+        success,
+        checkedAt: new Date()
+    })
+
     return {
         statusCode: response.status,
         latency,
