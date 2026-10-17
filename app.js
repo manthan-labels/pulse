@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const validateMonitorUrl = require("./utils/validateMonitorUrl");
+const validateMonitorDns = require("./utils/validateMonitorDns");
 
 const userModel = require("./usermodel");
 const monitorModel = require("./monitormodel");
@@ -22,8 +24,10 @@ async function checkMonitor(monitor_id) {
     console.log(monitorData);
     const monitorUrl = monitorData.url;
 
+    const validatedUrl = validateMonitorUrl(monitorUrl);
+
     const start = Date.now();
-    const response = await fetch(monitorUrl);
+    const response = await fetch(validatedUrl);
     const latency = Date.now() - start;
     const success = response.status == monitorData.expectedStatusCode;
 
@@ -100,6 +104,8 @@ app.post("/dashboard/addMonitor", isLoggedIn, async function (req, res) {
     const monitorDataReceived = req.body;
     console.log(monitorDataReceived);
 
+    const validatedUrl = validateMonitorUrl(monitorDataReceived.url);
+
     const loggedInUserData = jwt.verify(req.cookies.token, "jwt-secret");
     console.log(loggedInUserData);
     // got the _id from userSchema DB
@@ -107,7 +113,7 @@ app.post("/dashboard/addMonitor", isLoggedIn, async function (req, res) {
     await monitorModel.create({
         name: monitorDataReceived.name,
         user_id: loggedInUserData.user_id,
-        url: monitorDataReceived.url,
+        url: validatedUrl,
         expectedStatusCode: monitorDataReceived.expectedStatusCode
     });
 });
