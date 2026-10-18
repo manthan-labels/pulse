@@ -9,23 +9,26 @@ function Trackmonitor() {
         const monitorid = useParams().monitorid;
         const [monitorData, setMonitorData] = useState(null);
 
-        useEffect(() => {
         async function fetchMonitor() {
-            const response = await fetch(
-                `http://localhost:3000/dashboard/trackmonitor/${monitorid}`,
-                {
-                    method: "GET",
-                    credentials: "include"
-                }
+            setInterval(async () => {
+                const response = await fetch(
+                    `http://localhost:3000/dashboard/trackmonitor/${monitorid}`,
+                    {
+                        method: "GET",
+                        credentials: "include"
+                    }
             );
+                    const data = await response.json();
+                setMonitorData(data);
+            }, 5*1000);
 
-            const data = await response.json();
-            setMonitorData(data);
+            
         }
 
-        fetchMonitor();
-            }, [monitorid]);
-
+        
+        useEffect(() => {
+            fetchMonitor();
+        }, []);
     return (
         <div>
             <h1>This is your monitor</h1>
